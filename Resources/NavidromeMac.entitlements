@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!--
+      These entitlements are only required if you enable the App Sandbox
+      (e.g. when notarising for the Mac App Store). The default `build.sh`
+      ad-hoc signs WITHOUT the sandbox, so the generic-password Keychain access
+      used by KeychainHelper works out of the box.
+
+      If you turn the sandbox on, keep at least the network-client entitlement
+      so URLSession can reach your server.
+    -->
+    <key>com.apple.security.app-sandbox</key>
+    <true/>
+    <key>com.apple.security.network.client</key>
+    <true/>
+</dict>
+</plist>
