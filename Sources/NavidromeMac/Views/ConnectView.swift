@@ -33,7 +33,6 @@ struct ConnectView: View {
                 VStack(spacing: 12) {
                     labeledField("Name", text: $displayName, prompt: "My Navidrome")
                     labeledField("Server URL", text: $address, prompt: "https://music.example.com")
-                        .textContentType(.URL)
                     labeledField("Username", text: $username, prompt: "username")
                     SecureField("Password", text: $password)
                         .textFieldStyle(.roundedBorder)

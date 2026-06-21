@@ -64,7 +64,9 @@ struct PlaylistCell: View {
             }
         }
         .contentShape(Rectangle())
-        .onHover { withAnimation(.easeInOut(duration: 0.18)) { isHovering = $0 } }
+        .onHover { hovering in
+            withAnimation(.easeInOut(duration: 0.18)) { isHovering = hovering }
+        }
     }
 }
 

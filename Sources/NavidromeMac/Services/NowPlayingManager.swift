@@ -75,13 +75,15 @@ final class NowPlayingManager: ObservableObject {
             MPMediaItemPropertyArtist: track.artist ?? "",
             MPMediaItemPropertyAlbumTitle: track.album ?? "",
             MPMediaItemPropertyPlaybackDuration: Double(track.duration ?? 0),
-            MPNowPlayingInfoPropertyElapsedPlaybackTime: 0.0
+            MPNowPlayingInfoPropertyElapsedPlaybackTime: 0.0,
+            // On macOS the play/pause state is conveyed via the playback rate
+            // (MPNowPlayingPlaybackState is unavailable on macOS).
+            MPNowPlayingInfoPropertyPlaybackRate: 1.0
         ]
         if let artwork = await loadArtwork(for: track, api: api) {
             info[MPMediaItemPropertyArtwork] = artwork
         }
         infoCenter.nowPlayingInfo = info
-        infoCenter.playbackState = .playing
     }
 
     /// Refresh the dynamic fields (elapsed time, play/pause, rate) without
@@ -93,12 +95,10 @@ final class NowPlayingManager: ObservableObject {
         info[MPNowPlayingInfoPropertyPlaybackRate] = engine.isPlaying ? 1.0 : 0.0
         info[MPMediaItemPropertyPlaybackDuration] = engine.duration
         infoCenter.nowPlayingInfo = info
-        infoCenter.playbackState = engine.isPlaying ? .playing : .paused
     }
 
     func clear() {
         infoCenter.nowPlayingInfo = nil
-        infoCenter.playbackState = .stopped
     }
 
     // MARK: - Artwork
